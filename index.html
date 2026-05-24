@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>River Region Fencing Academy</title>
+  <title>Riverside Fencing Club</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     /* ===== DESIGN TOKENS ===== */
     :root {
-      --black:   #0e0e0e;
-      --white:   #f5f2ee;
-      --cream:   #e8e3da;
+      --black:   #090f14;
+      --white:   #f0f8fb;
+      --cream:   #ddf0f7;
       --blue:    #249CC7;
       --blue-dk: #1a7a9e;
-      --gray:    #5a5650;
-      --card-bg: #1a1916;
+      --gray:    #4a5a62;
+      --card-bg: #101820;
     }
 
     /* ===== RESET & BASE ===== */
@@ -32,8 +32,8 @@
       font-weight: 700;
       line-height: 1.15;
     }
-    a { color: var(--gold); text-decoration: none; }
-    a:hover { color: var(--gold-dk); }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-dk); }
     img { display: block; max-width: 100%; }
 
     /* ===== NAV ===== */
@@ -43,7 +43,7 @@
       z-index: 100;
       background: rgba(14, 14, 14, 0.92);
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(200,168,75,0.2);
+      border-bottom: 1px solid rgba(36,156,199,0.2);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -53,7 +53,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
       font-weight: 900;
-      color: var(--gold);
+      color: var(--blue);
       letter-spacing: 0.04em;
     }
     .nav-links {
@@ -68,7 +68,7 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover { color: var(--blue); }
 
     /* ===== HERO ===== */
     .hero {
@@ -89,7 +89,7 @@
       right: -5%;
       width: 55%;
       height: 130%;
-      background: linear-gradient(135deg, rgba(200,168,75,0.06) 0%, rgba(200,168,75,0.02) 100%);
+      background: linear-gradient(135deg, rgba(36,156,199,0.06) 0%, rgba(36,156,199,0.02) 100%);
       transform: skewX(-8deg);
       pointer-events: none;
     }
@@ -101,14 +101,14 @@
       top: 10%;
       width: 2px;
       height: 70%;
-      background: linear-gradient(to bottom, transparent, var(--gold) 30%, var(--gold) 80%, transparent);
+      background: linear-gradient(to bottom, transparent, var(--blue) 30%, var(--blue) 80%, transparent);
       opacity: 0.3;
     }
     .hero-eyebrow {
       font-size: 0.8rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--blue);
       margin-bottom: 1.2rem;
     }
     .hero h1 {
@@ -120,7 +120,7 @@
     }
     .hero h1 em {
       font-style: italic;
-      color: var(--gold);
+      color: var(--blue);
     }
     .hero-sub {
       font-size: 1.15rem;
@@ -131,15 +131,15 @@
     .btn {
       display: inline-block;
       padding: 0.85rem 2.2rem;
-      border: 1px solid var(--gold);
-      color: var(--gold);
+      border: 1px solid var(--blue);
+      color: var(--blue);
       font-size: 0.85rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       transition: background 0.25s, color 0.25s;
     }
     .btn:hover {
-      background: var(--gold);
+      background: var(--blue);
       color: var(--black);
     }
 
@@ -149,13 +149,13 @@
       font-size: 0.75rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--blue);
       margin-bottom: 0.6rem;
     }
     .section-title {
       font-size: clamp(2rem, 4vw, 3rem);
       margin-bottom: 3rem;
-      border-bottom: 1px solid rgba(200,168,75,0.2);
+      border-bottom: 1px solid rgba(36,156,199,0.2);
       padding-bottom: 1rem;
     }
 
@@ -174,14 +174,14 @@
       gap: 2rem;
     }
     .stat {
-      border: 1px solid rgba(200,168,75,0.25);
+      border: 1px solid rgba(36,156,199,0.25);
       padding: 1.5rem;
       text-align: center;
     }
     .stat-num {
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
-      color: var(--gold);
+      color: var(--blue);
       display: block;
     }
     .stat-label { font-size: 0.85rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em; }
@@ -194,16 +194,16 @@
       gap: 1.5rem;
     }
     .schedule-card {
-      border: 1px solid rgba(200,168,75,0.2);
+      border: 1px solid rgba(36,156,199,0.2);
       padding: 2rem;
       transition: border-color 0.25s;
     }
-    .schedule-card:hover { border-color: var(--gold); }
+    .schedule-card:hover { border-color: var(--blue); }
     .schedule-day {
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--blue);
       margin-bottom: 0.4rem;
     }
     .schedule-time {
@@ -225,8 +225,8 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      background: rgba(200,168,75,0.1);
-      border: 2px solid rgba(200,168,75,0.3);
+      background: rgba(36,156,199,0.1);
+      border: 2px solid rgba(36,156,199,0.3);
       margin: 0 auto 1.2rem;
       display: flex;
       align-items: center;
@@ -234,7 +234,7 @@
       font-size: 2rem;
     }
     .staff-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.2rem; }
-    .staff-role { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .staff-role { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
     .staff-bio { font-size: 0.9rem; color: var(--gray); }
 
     /* ===== LOCATION ===== */
@@ -250,14 +250,14 @@
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--blue);
       margin-bottom: 0.3rem;
     }
     .location-item-value { font-size: 1.1rem; color: var(--cream); }
     .map-placeholder {
       aspect-ratio: 4/3;
       background: var(--card-bg);
-      border: 1px solid rgba(200,168,75,0.2);
+      border: 1px solid rgba(36,156,199,0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -271,7 +271,7 @@
     /* ===== FOOTER ===== */
     footer {
       background: var(--card-bg);
-      border-top: 1px solid rgba(200,168,75,0.15);
+      border-top: 1px solid rgba(36,156,199,0.15);
       padding: 2.5rem;
       text-align: center;
       color: var(--gray);
@@ -279,7 +279,7 @@
     }
     footer .footer-brand {
       font-family: 'Playfair Display', serif;
-      color: var(--gold);
+      color: var(--blue);
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
