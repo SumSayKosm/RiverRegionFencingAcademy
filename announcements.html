@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Announcements &mdash; River Region Fencing Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== DESIGN TOKENS (keep in sync with index.html) ===== */
+    :root {
+      --black:   #090f14;
+      --white:   #f0f8fb;
+      --cream:   #ddf0f7;
+      --blue:    #249CC7;
+      --blue-dk: #1a7a9e;
+      --gray:    #4a5a62;
+      --card-bg: #101820;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-dk); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 15, 20, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(36,156,199,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--blue);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--cream);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--blue); }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      padding: 4rem 2.5rem 3rem;
+      border-bottom: 1px solid rgba(36,156,199,0.15);
+    }
+    .back-link {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--blue); }
+    .page-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .page-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 0.8rem;
+    }
+    .page-subtitle { font-size: 1rem; color: var(--gray); max-width: 500px; }
+
+    /* ===== ANNOUNCEMENTS LIST ===== */
+    .announcements-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem 2.5rem 5rem;
+    }
+
+    /*
+      ============================================================
+      HOW TO ADD A NEW ANNOUNCEMENT
+      ============================================================
+      Copy the block below (from <!-- POST --> to <!-- /POST -->)
+      and paste it at the TOP of the announcements-list div,
+      above all existing posts. Fill in:
+        - The date in <time>
+        - A category in .post-tag (e.g. "Schedule", "Event", "General")
+        - A title in .post-title
+        - Your message in .post-body (you can use multiple <p> tags)
+      Then update the banner on index.html to match.
+      ============================================================
+    -->
+
+    .announcements-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Individual post */
+    .post {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0 2.5rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(36,156,199,0.12);
+      position: relative;
+    }
+    .post:first-child { border-top: 1px solid rgba(36,156,199,0.12); }
+
+    /* Timeline dot */
+    .post::before {
+      content: '';
+      position: absolute;
+      left: 140px;
+      top: 3rem;
+      width: 8px;
+      height: 8px;
+      background: var(--blue);
+      border-radius: 50%;
+      transform: translateX(calc(-50% + 1.25rem));
+      opacity: 0.6;
+    }
+
+    .post-meta { padding-top: 0.15rem; }
+    .post-date {
+      font-size: 0.82rem;
+      color: var(--gray);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .post-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid rgba(36,156,199,0.35);
+      padding: 0.15rem 0.5rem;
+      display: inline-block;
+    }
+
+    .post-content { padding-left: 1.25rem; border-left: 1px solid rgba(36,156,199,0.15); }
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--white);
+    }
+    .post-body { font-size: 0.97rem; color: var(--cream); }
+    .post-body p { margin-bottom: 0.75rem; }
+    .post-body p:last-child { margin-bottom: 0; }
+
+    /* "NEW" badge on most recent post */
+    .post-new-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--blue);
+      color: var(--black);
+      padding: 0.15rem 0.5rem;
+      margin-left: 0.6rem;
+      vertical-align: middle;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 600;
+    }
+
+    /* Empty state */
+    .no-posts {
+      text-align: center;
+      padding: 5rem 0;
+      color: var(--gray);
+    }
+    .no-posts p { font-size: 1rem; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid rgba(36,156,199,0.15);
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    footer .footer-brand {
+      font-family: 'Playfair Display', serif;
+      color: var(--blue);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .page-header { padding: 2.5rem 1.2rem 2rem; }
+      .announcements-wrap { padding: 2rem 1.2rem 4rem; }
+      .post { grid-template-columns: 1fr; gap: 0.5rem; }
+      .post::before { display: none; }
+      .post-content { padding-left: 0; border-left: none; border-top: 1px solid rgba(36,156,199,0.15); padding-top: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <a href="index.html" class="nav-brand">⚔ River Region Fencing Academy</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#schedule">Schedule</a></li>
+      <li><a href="index.html#staff">Staff</a></li>
+      <li><a href="index.html#location">Location</a></li>
+      <li><a href="announcements.html" class="active">Announcements</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="page-header">
+    <a href="index.html" class="back-link">&larr; Back to home</a>
+    <p class="page-eyebrow">Club Updates</p>
+    <h1 class="page-title">Announcements</h1>
+    <p class="page-subtitle">Schedule changes, events, and important club news. Newest posts appear at the top.</p>
+  </div>
+
+  <!-- ===== POSTS ===== -->
+  <div class="announcements-wrap">
+    <div class="announcements-list">
+
+      <!--
+        ============================================================
+        ADD NEW POSTS AT THE TOP — copy one <!-- POST --> block,
+        paste it here above the others, and fill in your content.
+        ============================================================
+      -->
+
+      <!-- POST -->
+      <article class="post">
+        <div class="post-meta">
+          <time class="post-date">May 24, 2026</time>
+          <span class="post-tag">General</span>
+        </div>
+        <div class="post-content">
+          <h2 class="post-title">
+            Welcome to our new website!
+            <span class="post-new-badge">New</span>
+          </h2>
+          <div class="post-body">
+            <p>We're excited to launch the new River Region Fencing Academy website. Check back here for important updates including last-minute schedule changes, event announcements, and club news.</p>
+            <p>If you have any questions, reach out to us at the contact info on the home page.</p>
+          </div>
+        </div>
+      </article>
+      <!-- /POST -->
+
+      <!-- POST -->
+      <article class="post">
+        <div class="post-meta">
+          <time class="post-date">May 10, 2026</time>
+          <span class="post-tag">Schedule</span>
+        </div>
+        <div class="post-content">
+          <h2 class="post-title">Saturday May 17 practice cancelled</h2>
+          <div class="post-body">
+            <p>Due to a facility conflict, the Saturday May 17 session (both youth class and open bouting) will not be held. We'll resume the following Saturday as normal.</p>
+            <p>Apologies for the short notice — thank you for your understanding!</p>
+          </div>
+        </div>
+      </article>
+      <!-- /POST -->
+
+      <!-- POST -->
+      <article class="post">
+        <div class="post-meta">
+          <time class="post-date">April 28, 2026</time>
+          <span class="post-tag">Event</span>
+        </div>
+        <div class="post-content">
+          <h2 class="post-title">Spring open tournament — June 7</h2>
+          <div class="post-body">
+            <p>We'll be hosting our annual spring open tournament on June 7th. All club members are welcome to compete. Registration details to follow — keep an eye on this page.</p>
+          </div>
+        </div>
+      </article>
+      <!-- /POST -->
+
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p class="footer-brand">⚔ River Region Fencing Academy</p>
+    <p>&copy; 2026 River Region Fencing Academy &mdash; A nonprofit organization. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
