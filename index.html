@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riverside Fencing Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --black:   #0e0e0e;
+      --white:   #f5f2ee;
+      --cream:   #e8e3da;
+      --gold:    #c8a84b;
+      --gold-dk: #9e7d2a;
+      --gray:    #5a5650;
+      --card-bg: #1a1916;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold-dk); }
+    img { display: block; max-width: 100%; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14, 14, 14, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--cream);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 6rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative diagonal stripe */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 55%;
+      height: 130%;
+      background: linear-gradient(135deg, rgba(200,168,75,0.06) 0%, rgba(200,168,75,0.02) 100%);
+      transform: skewX(-8deg);
+      pointer-events: none;
+    }
+    /* Fencing blade accent */
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 15%;
+      top: 10%;
+      width: 2px;
+      height: 70%;
+      background: linear-gradient(to bottom, transparent, var(--gold) 30%, var(--gold) 80%, transparent);
+      opacity: 0.3;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 900;
+      color: var(--white);
+      max-width: 700px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--gray);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* ===== SECTION SHARED ===== */
+    section { padding: 5rem 2.5rem; }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 3rem;
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+      padding-bottom: 1rem;
+    }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--card-bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text p { color: var(--cream); margin-bottom: 1rem; }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .stat {
+      border: 1px solid rgba(200,168,75,0.25);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--gold);
+      display: block;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* ===== SCHEDULE ===== */
+    #schedule { background: var(--black); }
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .schedule-card {
+      border: 1px solid rgba(200,168,75,0.2);
+      padding: 2rem;
+      transition: border-color 0.25s;
+    }
+    .schedule-card:hover { border-color: var(--gold); }
+    .schedule-day {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .schedule-time {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .schedule-desc { font-size: 0.9rem; color: var(--gray); }
+
+    /* ===== STAFF ===== */
+    #staff { background: var(--card-bg); }
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .staff-card { text-align: center; }
+    .staff-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(200,168,75,0.1);
+      border: 2px solid rgba(200,168,75,0.3);
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .staff-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.2rem; }
+    .staff-role { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .staff-bio { font-size: 0.9rem; color: var(--gray); }
+
+    /* ===== LOCATION ===== */
+    #location { background: var(--black); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .location-details { display: flex; flex-direction: column; gap: 2rem; }
+    .location-item-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .location-item-value { font-size: 1.1rem; color: var(--cream); }
+    .map-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--card-bg);
+      border: 1px solid rgba(200,168,75,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 0.9rem;
+      gap: 0.5rem;
+    }
+    .map-placeholder svg { opacity: 0.4; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid rgba(200,168,75,0.15);
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    footer .footer-brand {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      section { padding: 3.5rem 1.2rem; }
+      .hero { padding: 4rem 1.2rem; }
+      .about-grid, .location-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <span class="nav-brand">⚔ Riverside Fencing Club</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#staff">Staff</a></li>
+      <li><a href="#location">Location</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <p class="hero-eyebrow">Est. 2010 &mdash; Serving the Community</p>
+    <h1>The Art of the <em>Blade.</em></h1>
+    <p class="hero-sub">
+      Welcome to Riverside Fencing Club — a nonprofit club open to all ages and skill levels. Come learn the sport, make friends, and find your competitive edge.
+    </p>
+    <a href="#schedule" class="btn">View Schedule</a>
+  </header>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <p class="section-label">Who We Are</p>
+    <h2 class="section-title">About the Club</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Riverside Fencing Club is a nonprofit organization dedicated to making the sport of fencing accessible to everyone in our community. Whether you're a curious beginner or a competitive athlete, there's a place for you here.
+        </p>
+        <p>
+          We offer instruction in all three fencing weapons — foil, épée, and sabre — with coaches who are passionate about the sport and committed to your growth.
+        </p>
+        <p>
+          All equipment is provided for beginners. No experience necessary — just show up ready to learn!
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat">
+          <span class="stat-num">15+</span>
+          <span class="stat-label">Years Running</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">80+</span>
+          <span class="stat-label">Active Members</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Weapons Taught</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">All</span>
+          <span class="stat-label">Ages Welcome</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCHEDULE ===== -->
+  <section id="schedule">
+    <p class="section-label">When We Meet</p>
+    <h2 class="section-title">Practice Schedule</h2>
+    <div class="schedule-grid">
+
+      <div class="schedule-card">
+        <p class="schedule-day">Monday</p>
+        <p class="schedule-time">6:00 – 8:00 PM</p>
+        <p class="schedule-desc">Beginner Foil — open to all new members, equipment provided.</p>
+      </div>
+
+      <div class="schedule-card">
+        <p class="schedule-day">Wednesday</p>
+        <p class="schedule-time">6:30 – 9:00 PM</p>
+        <p class="schedule-desc">Intermediate &amp; Advanced — all weapons, open bouting.</p>
+      </div>
+
+      <div class="schedule-card">
+        <p class="schedule-day">Saturday</p>
+        <p class="schedule-time">10:00 AM – 12:00 PM</p>
+        <p class="schedule-desc">Youth Class (ages 10–16) — foil instruction and drills.</p>
+      </div>
+
+      <div class="schedule-card">
+        <p class="schedule-day">Saturday</p>
+        <p class="schedule-time">12:00 – 3:00 PM</p>
+        <p class="schedule-desc">Open Bouting — members of all levels, come and fence!</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== STAFF ===== -->
+  <section id="staff">
+    <p class="section-label">Our Team</p>
+    <h2 class="section-title">Meet the Staff</h2>
+    <div class="staff-grid">
+
+      <div class="staff-card">
+        <div class="staff-avatar">🤺</div>
+        <p class="staff-name">Jane Smith</p>
+        <p class="staff-role">Club Director</p>
+        <p class="staff-bio">Jane founded the club in 2010 and holds a USFA Level 3 coaching certification. She specializes in foil and épée.</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">🤺</div>
+        <p class="staff-name">Marcus Lee</p>
+        <p class="staff-role">Head Coach — Sabre</p>
+        <p class="staff-bio">A former collegiate sabre competitor, Marcus brings energy and precision to every practice session.</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">🤺</div>
+        <p class="staff-name">Your Name Here</p>
+        <p class="staff-role">Instructor — Foil</p>
+        <p class="staff-bio">Add your bio here! Tell members a bit about your background and what you love about fencing.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== LOCATION ===== -->
+  <section id="location">
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Location &amp; Contact</h2>
+    <div class="location-grid">
+      <div class="location-details">
+        <div>
+          <p class="location-item-label">Address</p>
+          <p class="location-item-value">
+            123 Main Street<br>
+            Suite 4B<br>
+            Your City, ST 00000
+          </p>
+        </div>
+        <div>
+          <p class="location-item-label">Phone</p>
+          <p class="location-item-value"><a href="tel:+15550000000">(555) 000-0000</a></p>
+        </div>
+        <div>
+          <p class="location-item-label">Email</p>
+          <p class="location-item-value"><a href="mailto:info@yourclub.org">info@yourclub.org</a></p>
+        </div>
+        <div>
+          <p class="location-item-label">Parking</p>
+          <p class="location-item-value">Free parking available in the lot behind the building.</p>
+        </div>
+      </div>
+
+      <!-- 
+        TIP: Replace this placeholder with a real Google Maps embed!
+        1. Go to maps.google.com and search your address
+        2. Click Share > Embed a map
+        3. Copy the <iframe> code and paste it here in place of this div
+      -->
+      <div class="map-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <span>Replace with a Google Maps embed</span>
+        <span style="font-size:0.8rem; opacity:0.6">(see comment in HTML)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p class="footer-brand">⚔ Riverside Fencing Club</p>
+    <p>&copy; 2026 Riverside Fencing Club &mdash; A nonprofit organization. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
