@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About &mdash; River Region Fencing Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:   #090f14;
+      --white:   #f0f8fb;
+      --cream:   #ddf0f7;
+      --blue:    #249CC7;
+      --blue-dk: #1a7a9e;
+      --gray:    #4a5a62;
+      --card-bg: #101820;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-dk); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 15, 20, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(36,156,199,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--blue);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--cream);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--blue); }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      padding: 4rem 2.5rem 3rem;
+      border-bottom: 1px solid rgba(36,156,199,0.15);
+    }
+    .back-link {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--blue); }
+    .page-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .page-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 0.8rem; }
+    .page-subtitle { font-size: 1rem; color: var(--gray); max-width: 560px; }
+
+    /* ===== CONTENT WRAP ===== */
+    .content-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem 6rem;
+    }
+
+    /* ===== MISSION SECTION ===== */
+    .mission-statement {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-style: italic;
+      color: var(--cream);
+      border-left: 3px solid var(--blue);
+      padding-left: 1.5rem;
+      margin-bottom: 3rem;
+      line-height: 1.5;
+    }
+
+    .pillars { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 5rem; }
+    .pillar {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .pillar-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: rgba(36,156,199,0.25);
+      line-height: 1;
+      width: 2.5rem;
+      text-align: right;
+    }
+    .pillar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .pillar-body { font-size: 0.97rem; color: var(--cream); }
+
+    /* ===== DIVIDER ===== */
+    .section-divider {
+      border: none;
+      border-top: 1px solid rgba(36,156,199,0.2);
+      margin: 0 0 4rem;
+    }
+
+    /* ===== SECTION HEADING ===== */
+    .content-section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+    .content-section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ===== CODE OF CONDUCT ===== */
+    .conduct-list { display: flex; flex-direction: column; gap: 2rem; }
+    .conduct-item {
+      background: var(--card-bg);
+      border: 1px solid rgba(36,156,199,0.15);
+      border-left: 3px solid rgba(36,156,199,0.5);
+      padding: 1.5rem 1.75rem;
+      transition: border-left-color 0.2s;
+    }
+    .conduct-item:hover { border-left-color: var(--blue); }
+    .conduct-item-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .conduct-num {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--blue);
+      font-weight: 600;
+    }
+    .conduct-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+    }
+    .conduct-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .conduct-bullets li {
+      font-size: 0.93rem;
+      color: var(--cream);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .conduct-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid rgba(36,156,199,0.15);
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    footer .footer-brand {
+      font-family: 'Playfair Display', serif;
+      color: var(--blue);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .page-header { padding: 2.5rem 1.2rem 2rem; }
+      .content-wrap { padding: 2.5rem 1.2rem 4rem; }
+      .pillar { grid-template-columns: 1fr; gap: 0.3rem; }
+      .pillar-number { font-size: 1.5rem; width: auto; text-align: left; }
+    }
+    @media (max-width: 480px) { .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <a href="index.html" class="nav-brand">⚔ River Region Fencing Academy</a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="index.html#schedule">Schedule</a></li>
+      <li><a href="staff.html">Staff</a></li>
+      <li><a href="index.html#location">Location</a></li>
+      <li><a href="announcements.html">Announcements</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="page-header">
+    <a href="index.html" class="back-link">&larr; Back to home</a>
+    <p class="page-eyebrow">Who We Are</p>
+    <h1 class="page-title">About the Club</h1>
+    <p class="page-subtitle">Our mission, values, and the code of conduct that guides everything we do.</p>
+  </div>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="content-wrap">
+
+    <!-- Statement of Purpose -->
+    <p class="content-section-label">Statement of Purpose</p>
+    <h2 class="content-section-title">Our Mission</h2>
+
+    <p class="mission-statement">
+      "Our mission is bringing people together to learn, practice, and enjoy fencing in a fun and supportive environment."
+    </p>
+
+    <div class="pillars">
+
+      <div class="pillar">
+        <span class="pillar-number">1</span>
+        <div>
+          <p class="pillar-title">Friendly &amp; Welcoming</p>
+          <p class="pillar-body">Our mission is to create a fun, inclusive space where people of all skill levels can enjoy the art and sport of fencing, build confidence, and connect with others in a supportive community.</p>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <span class="pillar-number">2</span>
+        <div>
+          <p class="pillar-title">Community-Focused</p>
+          <p class="pillar-body">We aim to foster a welcoming fencing community that encourages learning, camaraderie, and personal growth through friendly practice and shared passion for the sport.</p>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <span class="pillar-number">3</span>
+        <div>
+          <p class="pillar-title">Accessible &amp; Encouraging</p>
+          <p class="pillar-body">Our mission is to make fencing accessible and fun for everyone. We strive to be a safe, supportive environment where everyone is welcome. Club members can develop their fencing skills, stay active, and enjoy the sport at their own pace.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Code of Conduct -->
+    <p class="content-section-label">Community Standards</p>
+    <h2 class="content-section-title">Code of Conduct</h2>
+
+    <div class="conduct-list">
+
+      <div class="conduct-item">
+        <div class="conduct-item-header">
+          <span class="conduct-num">01</span>
+          <h3 class="conduct-title">Respect for Everyone</h3>
+        </div>
+        <ul class="conduct-bullets">
+          <li>Treat all members, guests, and instructors with respect and courtesy.</li>
+          <li>Harassment, discrimination, or disrespectful behavior of any kind will not be tolerated.</li>
+          <li>Encourage and support fellow fencers, regardless of skill level.</li>
+        </ul>
+      </div>
+
+      <div class="conduct-item">
+        <div class="conduct-item-header">
+          <span class="conduct-num">02</span>
+          <h3 class="conduct-title">Safety First</h3>
+        </div>
+        <ul class="conduct-bullets">
+          <li>Follow all safety rules and instructions at all times.</li>
+          <li>Wear appropriate protective gear during fencing activities.</li>
+          <li>Immediately report unsafe conditions, injuries, or equipment issues.</li>
+          <li>Fence with control and consideration for your partner.</li>
+        </ul>
+      </div>
+
+      <div class="conduct-item">
+        <div class="conduct-item-header">
+          <span class="conduct-num">03</span>
+          <h3 class="conduct-title">Sportsmanship</h3>
+        </div>
+        <ul class="conduct-bullets">
+          <li>Practice honesty and fairness in all bouts.</li>
+          <li>Accept victories and defeats gracefully.</li>
+          <li>Resolve disagreements calmly and respectfully.</li>
+        </ul>
+      </div>
+
+      <div class="conduct-item">
+        <div class="conduct-item-header">
+          <span class="conduct-num">04</span>
+          <h3 class="conduct-title">Inclusivity</h3>
+        </div>
+        <ul class="conduct-bullets">
+          <li>Welcome fencers of all backgrounds, identities, and abilities.</li>
+          <li>Help create an environment where everyone feels comfortable participating.</li>
+          <li>Avoid language or behavior that excludes or intimidates others.</li>
+        </ul>
+      </div>
+
+      <div class="conduct-item">
+        <div class="conduct-item-header">
+          <span class="conduct-num">05</span>
+          <h3 class="conduct-title">Participation &amp; Attitude</h3>
+        </div>
+        <ul class="conduct-bullets">
+          <li>Come ready to learn, have fun, and contribute positively to the group.</li>
+          <li>Be open to feedback and willing to help others improve.</li>
+          <li>Keep a positive, low-pressure atmosphere.</li>
+        </ul>
+      </div>
+
+      <div class="conduct-item">
+        <div class="conduct-item-header">
+          <span class="conduct-num">06</span>
+          <h3 class="conduct-title">Equipment &amp; Facility Care</h3>
+        </div>
+        <ul class="conduct-bullets">
+          <li>Treat club equipment and facilities with care.</li>
+          <li>Return borrowed gear in good condition.</li>
+          <li>Clean up after yourself and help maintain a tidy space.</li>
+        </ul>
+      </div>
+
+      <div class="conduct-item">
+        <div class="conduct-item-header">
+          <span class="conduct-num">07</span>
+          <h3 class="conduct-title">Responsibility</h3>
+        </div>
+        <ul class="conduct-bullets">
+          <li>Follow club policies and instructions from organizers or coaches.</li>
+          <li>Respect shared time and space.</li>
+          <li>Communicate if you have concerns or conflicts.</li>
+        </ul>
+      </div>
+
+      <div class="conduct-item">
+        <div class="conduct-item-header">
+          <span class="conduct-num">08</span>
+          <h3 class="conduct-title">Accountability</h3>
+        </div>
+        <ul class="conduct-bullets">
+          <li>Members are expected to uphold this code at all times.</li>
+          <li>Repeated or serious violations may result in warnings or removal from club activities.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p class="footer-brand">⚔ River Region Fencing Academy</p>
+    <p>&copy; 2024 River Region Fencing Academy &mdash; A nonprofit organization. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

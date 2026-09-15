@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff &mdash; River Region Fencing Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:   #090f14;
+      --white:   #f0f8fb;
+      --cream:   #ddf0f7;
+      --blue:    #249CC7;
+      --blue-dk: #1a7a9e;
+      --gray:    #4a5a62;
+      --card-bg: #101820;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-dk); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 15, 20, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(36,156,199,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--blue);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--cream);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--blue); }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      padding: 4rem 2.5rem 3rem;
+      border-bottom: 1px solid rgba(36,156,199,0.15);
+    }
+    .back-link {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--blue); }
+    .page-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .page-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 0.8rem; }
+    .page-subtitle { font-size: 1rem; color: var(--gray); max-width: 500px; }
+
+    /* ===== STAFF GRID ===== */
+    .staff-wrap {
+      padding: 4rem 2.5rem 6rem;
+    }
+    .staff-grid {
+      display: grid;
+      /*
+        Each card is at least 300px wide. On a typical desktop this gives
+        you 2-3 cards per row; on mobile it stacks to 1.
+      */
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ===== STAFF CARD ===== */
+    .staff-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(36,156,199,0.15);
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+    .staff-card:hover { border-color: rgba(36,156,199,0.5); }
+
+    /*
+      PHOTO AREA
+      ─────────────────────────────────────────────────────────────
+      To add a real photo:
+        1. Put the image file (e.g. heidi.jpg) in the same folder
+           as this HTML file on GitHub.
+        2. Replace the entire <div class="staff-photo-placeholder">
+           block for that person with:
+             <img src="heidi.jpg" alt="Heidi Kolendar" class="staff-photo" />
+        3. The .staff-photo class below will handle sizing automatically.
+      ─────────────────────────────────────────────────────────────
+    */
+    .staff-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .staff-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: linear-gradient(135deg, rgba(36,156,199,0.08) 0%, rgba(36,156,199,0.03) 100%);
+      border-bottom: 1px solid rgba(36,156,199,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--gray);
+    }
+    .staff-photo-placeholder span { font-size: 3rem; opacity: 0.4; }
+    .staff-photo-placeholder p { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; }
+
+    .staff-info { padding: 1.5rem; }
+    .staff-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
+    }
+    .staff-role {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.9rem;
+    }
+    .staff-bio { font-size: 0.93rem; color: var(--cream); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid rgba(36,156,199,0.15);
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    footer .footer-brand {
+      font-family: 'Playfair Display', serif;
+      color: var(--blue);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .page-header { padding: 2.5rem 1.2rem 2rem; }
+      .staff-wrap { padding: 2.5rem 1.2rem 4rem; }
+    }
+    @media (max-width: 480px) { .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <a href="index.html" class="nav-brand">⚔ River Region Fencing Academy</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#schedule">Schedule</a></li>
+      <li><a href="staff.html" class="active">Staff</a></li>
+      <li><a href="index.html#location">Location</a></li>
+      <li><a href="announcements.html">Announcements</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="page-header">
+    <a href="index.html" class="back-link">&larr; Back to home</a>
+    <p class="page-eyebrow">Our Team</p>
+    <h1 class="page-title">Meet the Staff</h1>
+    <p class="page-subtitle">The instructors and organizers who make River Region Fencing Academy run.</p>
+  </div>
+
+  <!-- ===== STAFF CARDS ===== -->
+  <div class="staff-wrap">
+    <div class="staff-grid">
+
+      <!--
+        ============================================================
+        HOW TO ADD A STAFF PHOTO
+        ============================================================
+        1. Save the photo file (e.g. heidi.jpg) into the same
+           folder as this HTML file on GitHub.
+        2. Delete the <div class="staff-photo-placeholder"> block
+           for that person.
+        3. Replace it with:
+           <img src="heidi.jpg" alt="Heidi Kolendar" class="staff-photo" />
+        Photos look best in portrait orientation (taller than wide).
+        ============================================================
+      -->
+
+      <!-- STAFF CARD: Heidi -->
+      <div class="staff-card">
+        <div class="staff-photo-placeholder">
+          <span>🤺</span>
+          <p>Photo coming soon</p>
+        </div>
+        <div class="staff-info">
+          <h2 class="staff-name">Heidi Kolendar</h2>
+          <p class="staff-role">Club Owner</p>
+          <p class="staff-bio"><!-- Ask Heidi to fill this in --></p>
+        </div>
+      </div>
+
+      <!-- STAFF CARD: Matt -->
+      <div class="staff-card">
+        <div class="staff-photo-placeholder">
+          <span>🤺</span>
+          <p>Photo coming soon</p>
+        </div>
+        <div class="staff-info">
+          <h2 class="staff-name">Matt</h2>
+          <p class="staff-role"><!-- Role TBD --></p>
+          <p class="staff-bio"><!-- Bio TBD --></p>
+        </div>
+      </div>
+
+      <!-- STAFF CARD: Alex -->
+      <div class="staff-card">
+        <div class="staff-photo-placeholder">
+          <span>🤺</span>
+          <p>Photo coming soon</p>
+        </div>
+        <div class="staff-info">
+          <h2 class="staff-name">Alex Lawrence</h2>
+          <p class="staff-role">Instructor</p>
+          <p class="staff-bio"><!-- Add bio here --></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p class="footer-brand">⚔ River Region Fencing Academy</p>
+    <p>&copy; 2024 River Region Fencing Academy &mdash; A nonprofit organization. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
